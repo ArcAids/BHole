@@ -77,9 +77,10 @@ Camera:
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
   m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -172,7 +173,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.8
-  m_Radius: 0.33
+  m_Radius: 0.6
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -208,7 +209,7 @@ MonoBehaviour:
     lockCursor: 1
   m_UseFovKick: 1
   m_FovKick:
-    Camera: {fileID: 0}
+    cam: {fileID: 0}
     originalFov: 0
     FOVIncrease: 3
     TimeToIncrease: 1
@@ -311,7 +312,8 @@ AudioSource:
   m_GameObject: {fileID: 4871561475275392902}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243316367997435976, guid: d9866916ffc88d54ca4a446ac304082f,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -410,6 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa7509aa050b8d4c96a73614426ee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunName: {fileID: 0}
   gunHolder: {fileID: 4871561475304848747}
   aimPosition: {fileID: 1776327988}
   followCursor: 0
@@ -419,7 +422,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  cam: {fileID: 4871561475276899750}
+  cam: {fileID: 0}
 --- !u!54 &939948480
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ namespace WeaponSystem
 
     public class FirstPersonShooter : MonoBehaviour
     {
-
+        [SerializeField] TMPro.TMP_Text gunName;
         [SerializeField]
         protected Transform gunHolder;
         [SerializeField]
@@ -111,10 +111,11 @@ namespace WeaponSystem
             if (emptySlot >= 0)     //if theres empty slot, add weapon in the slot and return.
             {
                 weapons[emptySlot] = weapon;
-                if (currentEquippedWeaponIndex < 0 || primaryWeaponIndex<0)     //if there is no weapon or player picked a primary weapon, then equip it.
                     EquipWeapon(emptySlot);
-                else
-                    Dequip(weapon);         //or just leave it in other slot.
+                //if (currentEquippedWeaponIndex < 0)     //if there is no weapon or player picked a primary weapon, then equip it.
+                //else
+                //    Dequip(weapon);         //or just leave it in other slot.
+                //Debug.Log("Dropped " + weapon.name);
                 return;
             }
 
@@ -123,7 +124,6 @@ namespace WeaponSystem
                 DropWeapon(primaryWeaponIndex);
                 weapons[primaryWeaponIndex] = weapon;
                 EquipWeapon(primaryWeaponIndex);
-                
             }
 
             if (weapon.type == WeaponType.secondary)        //if secondary weapon is being picked for the first time, drop current primary weapon.
@@ -223,11 +223,12 @@ namespace WeaponSystem
             if (currentEquippedWeaponIndex >= 0)
                 Dequip(weapons[currentEquippedWeaponIndex]);
 
-            if (weapon is GunBehaviour)     //place it in right position
+            if (weapon is WeaponBehaviour)     //place it in right position
             {
                 weapon.gameObject.transform.parent = gunHolder;
                 weapon.transform.localPosition = Vector3.zero;
                 weapon.transform.localRotation = Quaternion.identity;
+                gunName.text = weapon.name;
             }
 
             Debug.Log("EquippingWeapon: "+ weapon.name);
@@ -250,7 +251,8 @@ namespace WeaponSystem
         /// <param name="weapon"></param>
         protected void Dequip(WeaponBehaviour weapon)
         {
-            if (weapon is GunBehaviour)             //leave it on the ground if not equipped.
+            Debug.Log("Dequiping " + weapon.name);
+            if (weapon is WeaponBehaviour)             //leave it on the ground if not equipped.
             {
                 weapon.Dequip();
             }
@@ -287,8 +289,9 @@ namespace WeaponSystem
         /// </summary>
         public void UpdateControls()
         {
-            if (Input.GetButton("Fire1"))
-                shootable?.Attack();
+
+            if (currentEquippedWeaponIndex < 0)
+                return;
 
             if (Input.GetButton("Fire2"))
             {
@@ -308,9 +311,14 @@ namespace WeaponSystem
                     weapons[currentEquippedWeaponIndex].transform.parent = gunHolder;
                 aimable?.StopAiming();
             }
+
+
+            if (Input.GetButton("Fire1"))
+                shootable?.Attack();
+
             weapons[currentEquippedWeaponIndex].transform.localPosition = Vector3.Lerp(weapons[currentEquippedWeaponIndex].transform.localPosition,Vector3.zero,Time.deltaTime *10);
-            if (Input.GetKey(KeyCode.Space))
-                melee?.Attack();
+            //if (Input.GetKey(KeyCode.Space))
+            //    melee?.Attack();
             if (Input.GetKey(KeyCode.R))
                 reloadable?.Reload();
 

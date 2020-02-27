@@ -21,4 +21,4 @@ Material:
     m_TexEnvs: []
     m_Floats: []
     m_Colors:
-    - Vector3_6FBEF6: {r: 1.333, g: 1.3333, b: 0, a: 0}
+    - Vector3_6FBEF6: {r: 2, g: 2, b: 0, a: 0}

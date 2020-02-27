@@ -6,9 +6,9 @@ public class BulletBehaviour : MonoBehaviour
 {
     float damage;
     TrailRenderer trail;
-    Rigidbody rigid;
+    protected Rigidbody rigid;
 
-    public void Init(float damage, float force)
+    public virtual void Init(float damage, float force)
     {
         this.damage = damage;
         rigid = GetComponent<Rigidbody>();
@@ -17,7 +17,7 @@ public class BulletBehaviour : MonoBehaviour
         Destroy(gameObject,2);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         ITakeDamage target = other.gameObject.GetComponent<ITakeDamage>();
         if (target!=null)

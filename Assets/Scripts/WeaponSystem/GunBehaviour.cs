@@ -8,6 +8,8 @@ namespace WeaponSystem
     public class GunBehaviour : WeaponBehaviour, IReloadable, IAimable
     {
         [SerializeField]
+        RectTransform gunUI;
+        [SerializeField]
         RecoilData recoilData;
         [SerializeField]
         CrossHair crossHair;
@@ -48,15 +50,12 @@ namespace WeaponSystem
         public int MagazineSize { get => magazineSize; }
         public float ReloadTime { get => reloadTime; }
 
-        private void Awake()
-        {
-            crossHair.Hide();
-        }
         public override void Init(CinemachineVirtualCamera cam)
         {
             this.cam = cam;
             FireRate = fireRate;
             bulletsInMagazine = MagazineSize;
+            crossHair.Hide();
             flash = muzzleTransform.gameObject.GetComponent<Light>();
             smoke = muzzleTransform.gameObject.GetComponentInChildren<ParticleSystem>();
             if (flash)
@@ -75,6 +74,8 @@ namespace WeaponSystem
         {
             defaultPosition = transform.localPosition;
             gameObject.SetActive(true);
+            gunUI.localScale = Vector3.one;
+            crossHair.Show();
             nextFire = 0;
         }
 
@@ -107,6 +108,16 @@ namespace WeaponSystem
             if (Physics.Raycast(new Ray(muzzleTransform.position, muzzleTransform.forward),out hit,500))
             {
                 hit.collider.gameObject.GetComponent<ITakeDamage>()?.OnDamageTaken(bulletDamage);
+            }
+        }
+
+        void ShootWormHole()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(new Ray(muzzleTransform.position, muzzleTransform.forward), out hit, 500))
+            {
+                GameObject wormHole=Instantiate(bulletPrefab, hit.point+hit.normal,Quaternion.identity, null);
+                wormHole.transform.forward = hit.normal;
             }
         }
 
@@ -181,12 +192,14 @@ namespace WeaponSystem
         public override void Dequip()
         {
             transform.parent = null;
+            gunUI.localScale = Vector3.one * 0.5f;
             gameObject.SetActive(false);
         }
 
         public override void Pick()
         {
             Picked = true;
+            gunUI.gameObject.SetActive(true);
             crossHair.Show();
             GetComponent<Collider>().enabled = false;
         }

@@ -17,8 +17,10 @@ namespace GameSettingsUI
 
         private void Start()
         {
-
+            if(GameManager.Instance!=null)
+                Destroy(GameManager.Instance.gameObject);
             gameSettings.LoadSettings();
+            Cursor.lockState = CursorLockMode.None;
         }
 
         public void LoadGame()

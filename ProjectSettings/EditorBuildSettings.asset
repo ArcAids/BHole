@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: cf1469f83caa91b4ebadf11d72766273
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Main Game.unity
+    guid: b4bb934bf75760e47a94d51502e60c16
+  - enabled: 1
+    path: Assets/Scenes/WormHolePurgatory.unity
+    guid: 32c3b33e735677a42a2f731c477d27a9
   m_configObjects: {}

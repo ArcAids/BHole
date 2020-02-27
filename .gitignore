@@ -3,6 +3,7 @@
 [Oo]bj/
 [Bb]uild/
 WebBuild/
+Windows/
 [Bb]uilds/
 TextMesh Pro/
 Assets/AssetStoreTools*
@@ -35,4 +36,5 @@ sysinfo.txt
 
 # Builds
 *.apk
+*.zip
 *.unitypackage

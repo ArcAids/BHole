@@ -13,4 +13,10 @@ MonoBehaviour:
   m_Name: Levels 1
   m_EditorClassIdentifier: 
   tips:
-  - Test hint
+  - '[Right click] Aim to improve accuracy.'
+  - '[shift] to run faster'
+  - some tiles are not stable enough for wormholes.
+  - '[Escape] resets progress.'
+  - you keep the gun once obtained.
+  - Worm holes have no worms inside.
+  - Its not a black hole but a gravity hole.
